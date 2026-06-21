@@ -33,6 +33,9 @@ export function DashboardPage() {
           <Link className="secondary-link" to="/produtos">
             Ver produtos
           </Link>
+          <Link className="secondary-link" to="/representantes">
+            Ver representantes
+          </Link>
         </div>
       </section>
     </main>

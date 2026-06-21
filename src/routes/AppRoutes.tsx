@@ -4,6 +4,7 @@ import { LoginPage } from '../pages/LoginPage'
 import { OrderDetailsPage } from '../pages/OrderDetailsPage'
 import { OrdersPage } from '../pages/OrdersPage'
 import { ProductsPage } from '../pages/ProductsPage'
+import { RepresentativesPage } from '../pages/RepresentativesPage'
 import { ProtectedRoute } from './ProtectedRoute'
 
 export function AppRoutes() {
@@ -17,6 +18,7 @@ export function AppRoutes() {
           <Route path="/pedidos" element={<OrdersPage />} />
           <Route path="/pedidos/:id" element={<OrderDetailsPage />} />
           <Route path="/produtos" element={<ProductsPage />} />
+          <Route path="/representantes" element={<RepresentativesPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
