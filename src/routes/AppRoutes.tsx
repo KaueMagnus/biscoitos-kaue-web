@@ -3,6 +3,7 @@ import { DashboardPage } from '../pages/DashboardPage'
 import { LoginPage } from '../pages/LoginPage'
 import { OrderDetailsPage } from '../pages/OrderDetailsPage'
 import { OrdersPage } from '../pages/OrdersPage'
+import { ProductsPage } from '../pages/ProductsPage'
 import { ProtectedRoute } from './ProtectedRoute'
 
 export function AppRoutes() {
@@ -15,6 +16,7 @@ export function AppRoutes() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/pedidos" element={<OrdersPage />} />
           <Route path="/pedidos/:id" element={<OrderDetailsPage />} />
+          <Route path="/produtos" element={<ProductsPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

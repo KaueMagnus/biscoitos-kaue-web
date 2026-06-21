@@ -44,7 +44,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   width: 100%;
   box-sizing: border-box;
   padding: 11px 12px;
@@ -56,9 +57,15 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   border-color: #b45309;
   outline: 2px solid rgba(180, 83, 9, 0.18);
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
 }
 
 button,
@@ -292,6 +299,48 @@ tr:last-child td {
   padding: 18px;
 }
 
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr 180px;
+  gap: 16px;
+}
+
+.product-form label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.link-button {
+  padding: 0;
+  background: transparent;
+  color: #b45309;
+  font-weight: 700;
+}
+
+.link-button:hover {
+  background: transparent;
+  color: #92400e;
+}
+
+.danger-link {
+  color: #b91c1c;
+}
+
+.danger-link:hover {
+  color: #991b1b;
+}
+
 @media (max-width: 720px) {
   .topbar,
   .details-header,
@@ -301,6 +350,10 @@ tr:last-child td {
   }
 
   .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
     grid-template-columns: 1fr;
   }
 

@@ -30,6 +30,9 @@ export function DashboardPage() {
           <Link className="primary-link" to="/pedidos">
             Ver pedidos
           </Link>
+          <Link className="secondary-link" to="/produtos">
+            Ver produtos
+          </Link>
         </div>
       </section>
     </main>
