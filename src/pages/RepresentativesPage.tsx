@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { StatusBadge } from '../components/StatusBadge'
 import type {
   Representante,
   RepresentanteFormData,
@@ -93,22 +93,14 @@ export function RepresentativesPage() {
   }
 
   return (
-    <main className="page">
-      <header className="topbar">
-        <div>
-          <strong>Representantes</strong>
-          <span>Equipe comercial</span>
-        </div>
-
-        <Link className="secondary-link" to="/">
-          Dashboard
-        </Link>
+    <>
+      <header className="page-header">
+        <span className="eyebrow">Equipe comercial</span>
+        <h1>Representantes</h1>
+        <p>Cadastre e inative representantes que acessam o app mobile.</p>
       </header>
 
-      <section className="content">
-        <h1>Representantes</h1>
-        <p>Cadastre e inative representantes comerciais.</p>
-
+      <section className="page-section">
         <section className="status-form">
           <h2>Cadastrar representante</h2>
 
@@ -182,22 +174,18 @@ export function RepresentativesPage() {
               <tbody>
                 {representantes.map((representante) => (
                   <tr key={representante.id}>
-                    <td>#{representante.id}</td>
-                    <td>{representante.nome}</td>
+                    <td className="table-id">#{representante.id}</td>
+                    <td className="table-strong">{representante.nome}</td>
                     <td>{representante.email}</td>
                     <td>
                       {representante.ativo === undefined ? (
                         '-'
                       ) : (
-                        <span
-                          className={`status ${
-                            representante.ativo
-                              ? 'status-enviado'
-                              : 'status-cancelado'
-                          }`}
+                        <StatusBadge
+                          variant={representante.ativo ? 'success' : 'danger'}
                         >
                           {representante.ativo ? 'ATIVO' : 'INATIVO'}
-                        </span>
+                        </StatusBadge>
                       )}
                     </td>
                     <td>
@@ -221,6 +209,6 @@ export function RepresentativesPage() {
           </div>
         )}
       </section>
-    </main>
+    </>
   )
 }

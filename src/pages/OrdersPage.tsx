@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { obterNomeCliente, type Pedido } from '../models/Pedido'
+import { StatusBadge } from '../components/StatusBadge'
+import {
+  obterNomeCliente,
+  obterNomeRepresentante,
+  type Pedido,
+  type PedidoStatus,
+} from '../models/Pedido'
 import { listarPedidos } from '../services/orderService'
 
 function valorPedido(pedido: Pedido) {
@@ -14,6 +20,18 @@ function valorPedido(pedido: Pedido) {
     style: 'currency',
     currency: 'BRL',
   })
+}
+
+function statusVariant(status: PedidoStatus) {
+  if (status === 'PENDENTE') {
+    return 'pending'
+  }
+
+  if (status === 'ENVIADO') {
+    return 'success'
+  }
+
+  return 'danger'
 }
 
 export function OrdersPage() {
@@ -37,21 +55,14 @@ export function OrdersPage() {
   }, [])
 
   return (
-    <main className="page">
-      <header className="topbar">
-        <div>
-          <strong>Pedidos</strong>
-          <span>Listagem geral</span>
-        </div>
-
-        <Link className="secondary-link" to="/">
-          Dashboard
-        </Link>
+    <>
+      <header className="page-header">
+        <span className="eyebrow">Pedidos</span>
+        <h1>Listagem geral</h1>
+        <p>Acompanhe pedidos enviados pelos representantes comerciais.</p>
       </header>
 
-      <section className="content">
-        <h1>Pedidos</h1>
-
+      <section className="page-section">
         {carregando && <p>Carregando pedidos...</p>}
         {erro && <p className="error-message">{erro}</p>}
 
@@ -62,6 +73,8 @@ export function OrdersPage() {
                 <tr>
                   <th>ID</th>
                   <th>Cliente</th>
+                  <th>Representante</th>
+                  <th>Tipo</th>
                   <th>Status</th>
                   <th>Total</th>
                   <th>Acoes</th>
@@ -70,16 +83,20 @@ export function OrdersPage() {
               <tbody>
                 {pedidos.map((pedido) => (
                   <tr key={pedido.id}>
-                    <td>#{pedido.id}</td>
-                    <td>{obterNomeCliente(pedido)}</td>
+                    <td className="table-id">#{pedido.id}</td>
+                    <td className="table-strong">{obterNomeCliente(pedido)}</td>
+                    <td>{obterNomeRepresentante(pedido)}</td>
+                    <td>{pedido.tipo ?? '-'}</td>
                     <td>
-                      <span className={`status status-${pedido.status.toLowerCase()}`}>
+                      <StatusBadge variant={statusVariant(pedido.status)}>
                         {pedido.status}
-                      </span>
+                      </StatusBadge>
                     </td>
-                    <td>{valorPedido(pedido)}</td>
+                    <td className="table-strong">{valorPedido(pedido)}</td>
                     <td>
-                      <Link to={`/pedidos/${pedido.id}`}>Abrir detalhe</Link>
+                      <Link className="table-link" to={`/pedidos/${pedido.id}`}>
+                        Abrir detalhe
+                      </Link>
                     </td>
                   </tr>
                 ))}
@@ -92,6 +109,6 @@ export function OrdersPage() {
           </div>
         )}
       </section>
-    </main>
+    </>
   )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { Link } from 'react-router-dom'
+import { StatusBadge } from '../components/StatusBadge'
 import type { Produto, ProdutoFormData } from '../models/Produto'
 import {
   cadastrarProduto,
@@ -141,22 +141,14 @@ export function ProductsPage() {
   }
 
   return (
-    <main className="page">
-      <header className="topbar">
-        <div>
-          <strong>Produtos</strong>
-          <span>Catalogo de produtos</span>
-        </div>
-
-        <Link className="secondary-link" to="/">
-          Dashboard
-        </Link>
+    <>
+      <header className="page-header">
+        <span className="eyebrow">Catalogo</span>
+        <h1>Produtos</h1>
+        <p>Cadastre, edite e inative produtos vendidos pela equipe comercial.</p>
       </header>
 
-      <section className="content">
-        <h1>Produtos</h1>
-        <p>Cadastre, edite e inative produtos do catalogo.</p>
-
+      <section className="page-section">
         <section className="status-form">
           <h2>{produtoEditando ? 'Editar produto' : 'Cadastrar produto'}</h2>
 
@@ -253,21 +245,19 @@ export function ProductsPage() {
               <tbody>
                 {produtos.map((produto) => (
                   <tr key={produto.id}>
-                    <td>{produto.codigo}</td>
-                    <td>{produto.nome}</td>
+                    <td className="table-code">{produto.codigo}</td>
+                    <td className="table-strong">{produto.nome}</td>
                     <td>{produto.descricao}</td>
-                    <td>{formatarPreco(produto.preco)}</td>
+                    <td className="table-strong">{formatarPreco(produto.preco)}</td>
                     <td>
                       {produto.ativo === undefined ? (
                         '-'
                       ) : (
-                        <span
-                          className={`status ${
-                            produto.ativo ? 'status-enviado' : 'status-cancelado'
-                          }`}
+                        <StatusBadge
+                          variant={produto.ativo ? 'success' : 'danger'}
                         >
                           {produto.ativo ? 'ATIVO' : 'INATIVO'}
-                        </span>
+                        </StatusBadge>
                       )}
                     </td>
                     <td>
@@ -299,6 +289,6 @@ export function ProductsPage() {
           </div>
         )}
       </section>
-    </main>
+    </>
   )
 }

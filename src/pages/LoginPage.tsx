@@ -26,28 +26,42 @@ export function LoginPage() {
 
   return (
     <main className="login-page">
+      <section className="login-brand">
+        <div className="login-logo-box">
+          <img src="/logo_kaue.png" alt="Biscoitos Kaue" />
+        </div>
+        <span>Painel administrativo</span>
+        <h1>Gestao comercial com sabor de casa.</h1>
+        <p>Pedidos, produtos e representantes em um painel simples para ADMIN.</p>
+      </section>
+
       <section className="login-box">
-        <h1>Biscoitos Kaue</h1>
-        <p>Painel administrativo</p>
+        <span className="eyebrow">Acesso ADMIN</span>
+        <h2>Entrar no painel</h2>
+        <p>Informe suas credenciais para continuar.</p>
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="login">E-mail ou usuario</label>
-          <input
-            id="login"
-            type="text"
-            value={loginUsuario}
-            onChange={(event) => setLoginUsuario(event.target.value)}
-            required
-          />
+          <div>
+            <label htmlFor="login">E-mail ou usuario</label>
+            <input
+              id="login"
+              type="text"
+              value={loginUsuario}
+              onChange={(event) => setLoginUsuario(event.target.value)}
+              required
+            />
+          </div>
 
-          <label htmlFor="senha">Senha</label>
-          <input
-            id="senha"
-            type="password"
-            value={senha}
-            onChange={(event) => setSenha(event.target.value)}
-            required
-          />
+          <div>
+            <label htmlFor="senha">Senha</label>
+            <input
+              id="senha"
+              type="password"
+              value={senha}
+              onChange={(event) => setSenha(event.target.value)}
+              required
+            />
+          </div>
 
           {erro && <span className="error-message">{erro}</span>}
 

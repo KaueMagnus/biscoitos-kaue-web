@@ -17,6 +17,7 @@ export type Pedido = {
   status: PedidoStatus
   nomeCliente?: string
   nomeUsuario?: string
+  tipo?: string
   dataCriacao?: string
   dataPedido?: string
   valorTotal?: number

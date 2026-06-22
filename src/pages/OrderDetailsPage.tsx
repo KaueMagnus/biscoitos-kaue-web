@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { StatusBadge } from '../components/StatusBadge'
 import {
   obterNomeCliente,
   obterNomeRepresentante,
@@ -21,6 +22,18 @@ function formatarMoeda(valor?: number) {
     style: 'currency',
     currency: 'BRL',
   })
+}
+
+function statusVariant(status: PedidoStatus) {
+  if (status === 'PENDENTE') {
+    return 'pending'
+  }
+
+  if (status === 'ENVIADO') {
+    return 'success'
+  }
+
+  return 'danger'
 }
 
 export function OrderDetailsPage() {
@@ -75,11 +88,12 @@ export function OrderDetailsPage() {
   }
 
   return (
-    <main className="page">
-      <header className="topbar">
+    <>
+      <header className="page-header page-header-row">
         <div>
-          <strong>Detalhe do pedido</strong>
-          <span>{id ? `Pedido #${id}` : 'Pedido'}</span>
+          <span className="eyebrow">Detalhe do pedido</span>
+          <h1>{id ? `Pedido #${id}` : 'Pedido'}</h1>
+          <p>Consulte os dados do pedido e atualize o status.</p>
         </div>
 
         <Link className="secondary-link" to="/pedidos">
@@ -87,7 +101,7 @@ export function OrderDetailsPage() {
         </Link>
       </header>
 
-      <section className="content">
+      <section className="page-section">
         {carregando && <p>Carregando pedido...</p>}
         {erro && <p className="error-message">{erro}</p>}
 
@@ -99,9 +113,9 @@ export function OrderDetailsPage() {
                 <p>{obterNomeCliente(pedido)}</p>
               </div>
 
-              <span className={`status status-${pedido.status.toLowerCase()}`}>
+              <StatusBadge variant={statusVariant(pedido.status)}>
                 {pedido.status}
-              </span>
+              </StatusBadge>
             </div>
 
             <div className="details-grid">
@@ -112,6 +126,10 @@ export function OrderDetailsPage() {
               <div>
                 <strong>Representante</strong>
                 <span>{obterNomeRepresentante(pedido)}</span>
+              </div>
+              <div>
+                <strong>Tipo</strong>
+                <span>{pedido.tipo ?? '-'}</span>
               </div>
               <div>
                 <strong>Total</strong>
@@ -147,7 +165,7 @@ export function OrderDetailsPage() {
               {mensagem && <p className="success-message">{mensagem}</p>}
             </section>
 
-            <section>
+            <section className="page-section-card">
               <h2>Itens</h2>
               {pedido.itens && pedido.itens.length > 0 ? (
                 <div className="table-wrapper">
@@ -179,6 +197,6 @@ export function OrderDetailsPage() {
           </>
         )}
       </section>
-    </main>
+    </>
   )
 }

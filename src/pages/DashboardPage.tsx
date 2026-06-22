@@ -1,43 +1,34 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { logout } from '../services/authService'
+import { SummaryCard } from '../components/SummaryCard'
 
 export function DashboardPage() {
-  const navigate = useNavigate()
-
-  function handleLogout() {
-    logout()
-    navigate('/login')
-  }
-
   return (
-    <main className="page">
-      <header className="topbar">
-        <div>
-          <strong>Biscoitos Kaue</strong>
-          <span>Painel ADMIN</span>
-        </div>
-
-        <button type="button" className="secondary-button" onClick={handleLogout}>
-          Sair
-        </button>
+    <>
+      <header className="page-header">
+        <span className="eyebrow">Biscoitos Kaue</span>
+        <h1>Dashboard</h1>
+        <p>Gerencie pedidos, catalogo e equipe comercial em um so painel.</p>
       </header>
 
-      <section className="content">
-        <h1>Dashboard</h1>
-        <p>Acompanhe os pedidos dos representantes comerciais.</p>
-
-        <div className="actions-row">
-          <Link className="primary-link" to="/pedidos">
-            Ver pedidos
-          </Link>
-          <Link className="secondary-link" to="/produtos">
-            Ver produtos
-          </Link>
-          <Link className="secondary-link" to="/representantes">
-            Ver representantes
-          </Link>
-        </div>
+      <section className="dashboard-grid">
+        <SummaryCard
+          title="Pedidos"
+          description="Acompanhe pedidos dos representantes e atualize o status."
+          to="/pedidos"
+          action="Ver pedidos"
+        />
+        <SummaryCard
+          title="Produtos"
+          description="Cadastre, edite e inative produtos do catalogo."
+          to="/produtos"
+          action="Ver produtos"
+        />
+        <SummaryCard
+          title="Representantes"
+          description="Gerencie os acessos da equipe comercial."
+          to="/representantes"
+          action="Ver representantes"
+        />
       </section>
-    </main>
+    </>
   )
 }

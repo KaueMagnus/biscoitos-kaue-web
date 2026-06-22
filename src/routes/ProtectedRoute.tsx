@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { AppLayout } from '../components/AppLayout'
 import { isAuthenticated } from '../services/authService'
 
 export function ProtectedRoute() {
@@ -6,5 +7,9 @@ export function ProtectedRoute() {
     return <Navigate to="/login" replace />
   }
 
-  return <Outlet />
+  return (
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
+  )
 }
