@@ -18,7 +18,7 @@ export function LoginPage() {
       await login({ login: loginUsuario, senha })
       navigate('/')
     } catch {
-      setErro('Nao foi possivel fazer login. Verifique seus dados.')
+      setErro('Não foi possível fazer login. Verifique seus dados.')
     } finally {
       setCarregando(false)
     }
@@ -27,12 +27,16 @@ export function LoginPage() {
   return (
     <main className="login-page">
       <section className="login-brand">
-        <div className="login-logo-box">
-          <img src="/logo_kaue.png" alt="Biscoitos Kaue" />
+        <div className="login-brand-content">
+          <div className="login-logo-box">
+            <img src="/logo_biscoitos_kaue.png" alt="Biscoitos Kauê" />
+          </div>
+          <span>Painel administrativo</span>
+          <h1>Gestão comercial com sabor de casa.</h1>
+          <p>
+            Pedidos, produtos e representantes em um painel simples para ADMIN.
+          </p>
         </div>
-        <span>Painel administrativo</span>
-        <h1>Gestao comercial com sabor de casa.</h1>
-        <p>Pedidos, produtos e representantes em um painel simples para ADMIN.</p>
       </section>
 
       <section className="login-box">
@@ -42,7 +46,7 @@ export function LoginPage() {
 
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="login">E-mail ou usuario</label>
+            <label htmlFor="login">E-mail ou usuário</label>
             <input
               id="login"
               type="text"

@@ -57,7 +57,7 @@ export function OrderDetailsPage() {
         setPedido(dados)
         setStatusSelecionado(dados.status)
       } catch {
-        setErro('Nao foi possivel carregar o pedido.')
+        setErro('Não foi possível carregar o pedido.')
       } finally {
         setCarregando(false)
       }
@@ -81,7 +81,7 @@ export function OrderDetailsPage() {
       setStatusSelecionado(pedidoAtualizado.status)
       setMensagem('Status atualizado com sucesso.')
     } catch {
-      setErro('Nao foi possivel alterar o status do pedido.')
+      setErro('Não foi possível alterar o status do pedido.')
     } finally {
       setSalvando(false)
     }
@@ -174,14 +174,14 @@ export function OrderDetailsPage() {
                       <tr>
                         <th>Produto</th>
                         <th>Quantidade</th>
-                        <th>Valor unitario</th>
+                        <th>Valor unitário</th>
                         <th>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
                       {pedido.itens.map((item, index) => (
                         <tr key={item.id ?? index}>
-                          <td>{item.nomeProduto ?? 'Produto nao informado'}</td>
+                          <td>{item.nomeProduto ?? 'Produto não informado'}</td>
                           <td>{item.quantidade ?? '-'}</td>
                           <td>{formatarMoeda(item.precoUnitario)}</td>
                           <td>{formatarMoeda(item.subtotal)}</td>

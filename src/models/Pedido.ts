@@ -26,9 +26,9 @@ export type Pedido = {
 }
 
 export function obterNomeCliente(pedido: Pedido) {
-  return pedido.nomeCliente ?? 'Cliente nao informado'
+  return pedido.nomeCliente ?? 'Cliente não informado'
 }
 
 export function obterNomeRepresentante(pedido: Pedido) {
-  return pedido.nomeUsuario ?? 'Representante nao informado'
+  return pedido.nomeUsuario ?? 'Representante não informado'
 }

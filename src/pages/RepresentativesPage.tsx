@@ -32,7 +32,7 @@ export function RepresentativesPage() {
       const dados = await listarRepresentantes()
       setRepresentantes(dados)
     } catch {
-      setErro('Nao foi possivel carregar os representantes.')
+      setErro('Não foi possível carregar os representantes.')
     } finally {
       setCarregando(false)
     }
@@ -44,7 +44,7 @@ export function RepresentativesPage() {
         const dados = await listarRepresentantes()
         setRepresentantes(dados)
       } catch {
-        setErro('Nao foi possivel carregar os representantes.')
+        setErro('Não foi possível carregar os representantes.')
       } finally {
         setCarregando(false)
       }
@@ -65,7 +65,7 @@ export function RepresentativesPage() {
       setForm(formInicial)
       await carregarRepresentantes()
     } catch {
-      setErro('Nao foi possivel cadastrar o representante.')
+      setErro('Não foi possível cadastrar o representante.')
     } finally {
       setSalvando(false)
     }
@@ -88,7 +88,7 @@ export function RepresentativesPage() {
       setMensagem('Representante inativado com sucesso.')
       await carregarRepresentantes()
     } catch {
-      setErro('Nao foi possivel inativar o representante.')
+      setErro('Não foi possível inativar o representante.')
     }
   }
 
@@ -119,7 +119,7 @@ export function RepresentativesPage() {
               </div>
 
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">E-mail</label>
                 <input
                   id="email"
                   type="email"
@@ -166,9 +166,9 @@ export function RepresentativesPage() {
                 <tr>
                   <th>ID</th>
                   <th>Nome</th>
-                  <th>Email</th>
+                  <th>E-mail</th>
                   <th>Status</th>
-                  <th>Acoes</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>

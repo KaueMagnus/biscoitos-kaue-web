@@ -55,7 +55,7 @@ export function ProductsPage() {
       const dados = await listarProdutos()
       setProdutos(dados)
     } catch {
-      setErro('Nao foi possivel carregar os produtos.')
+      setErro('Não foi possível carregar os produtos.')
     } finally {
       setCarregando(false)
     }
@@ -67,7 +67,7 @@ export function ProductsPage() {
         const dados = await listarProdutos()
         setProdutos(dados)
       } catch {
-        setErro('Nao foi possivel carregar os produtos.')
+        setErro('Não foi possível carregar os produtos.')
       } finally {
         setCarregando(false)
       }
@@ -113,7 +113,7 @@ export function ProductsPage() {
       limparFormulario()
       await carregarProdutos()
     } catch {
-      setErro('Nao foi possivel salvar o produto.')
+      setErro('Não foi possível salvar o produto.')
     } finally {
       setSalvando(false)
     }
@@ -136,14 +136,14 @@ export function ProductsPage() {
       setMensagem('Produto inativado com sucesso.')
       await carregarProdutos()
     } catch {
-      setErro('Nao foi possivel inativar o produto.')
+      setErro('Não foi possível inativar o produto.')
     }
   }
 
   return (
     <>
       <header className="page-header">
-        <span className="eyebrow">Catalogo</span>
+        <span className="eyebrow">Catálogo</span>
         <h1>Produtos</h1>
         <p>Cadastre, edite e inative produtos vendidos pela equipe comercial.</p>
       </header>
@@ -155,7 +155,7 @@ export function ProductsPage() {
           <form className="product-form" onSubmit={handleSubmit}>
             <div className="form-grid">
               <div>
-                <label htmlFor="codigo">Codigo</label>
+                <label htmlFor="codigo">Código</label>
                 <input
                   id="codigo"
                   value={form.codigo}
@@ -179,7 +179,7 @@ export function ProductsPage() {
               </div>
 
               <div>
-                <label htmlFor="preco">Preco</label>
+                <label htmlFor="preco">Preço</label>
                 <input
                   id="preco"
                   type="number"
@@ -195,7 +195,7 @@ export function ProductsPage() {
             </div>
 
             <div>
-              <label htmlFor="descricao">Descricao</label>
+              <label htmlFor="descricao">Descrição</label>
               <textarea
                 id="descricao"
                 value={form.descricao}
@@ -217,7 +217,7 @@ export function ProductsPage() {
                   className="secondary-button"
                   onClick={limparFormulario}
                 >
-                  Cancelar edicao
+                  Cancelar edição
                 </button>
               )}
             </div>
@@ -234,12 +234,12 @@ export function ProductsPage() {
             <table>
               <thead>
                 <tr>
-                  <th>Codigo</th>
+                  <th>Código</th>
                   <th>Nome</th>
-                  <th>Descricao</th>
-                  <th>Preco</th>
+                  <th>Descrição</th>
+                  <th>Preço</th>
                   <th>Status</th>
-                  <th>Acoes</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>

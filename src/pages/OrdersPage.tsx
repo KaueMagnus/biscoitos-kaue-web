@@ -51,7 +51,7 @@ export function OrdersPage() {
         const dados = await listarPedidos()
         setPedidos(dados)
       } catch {
-        setErro('Nao foi possivel carregar os pedidos.')
+        setErro('Não foi possível carregar os pedidos.')
       } finally {
         setCarregando(false)
       }
@@ -159,7 +159,7 @@ export function OrdersPage() {
                     <th>Tipo</th>
                     <th>Status</th>
                     <th>Total</th>
-                    <th>Acoes</th>
+                  <th>Ações</th>
                   </tr>
                 </thead>
                 <tbody>

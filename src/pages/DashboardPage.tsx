@@ -67,7 +67,7 @@ export function DashboardPage() {
         produtosResult.status === 'rejected' ||
         representantesResult.status === 'rejected'
       ) {
-        setErro('Alguns dados do resumo nao puderam ser carregados.')
+        setErro('Alguns dados do resumo não puderam ser carregados.')
       }
 
       setCarregando(false)
@@ -79,9 +79,9 @@ export function DashboardPage() {
   return (
     <>
       <header className="page-header">
-        <span className="eyebrow">Biscoitos Kaue</span>
+        <span className="eyebrow">Biscoitos Kauê</span>
         <h1>Dashboard</h1>
-        <p>Gerencie pedidos, catalogo e equipe comercial em um so painel.</p>
+        <p>Gerencie pedidos, catálogo e equipe comercial em um só painel.</p>
       </header>
 
       <section className="metrics-grid">
@@ -122,7 +122,7 @@ export function DashboardPage() {
         />
         <SummaryCard
           title="Produtos"
-          description="Cadastre, edite e inative produtos do catalogo."
+          description="Cadastre, edite e inative produtos do catálogo."
           to="/produtos"
           action="Ver produtos"
         />

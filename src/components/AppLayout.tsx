@@ -6,7 +6,7 @@ type AppLayoutProps = {
   children: ReactNode
 }
 
-const logoSrc = '/logo_kaue.png'
+const logoSrc = '/logo_biscoitos_kaue.png'
 
 export function AppLayout({ children }: AppLayoutProps) {
   const navigate = useNavigate()
@@ -20,11 +20,11 @@ export function AppLayout({ children }: AppLayoutProps) {
     <main className="app-shell">
       <aside className="sidebar">
         <div className="brand-panel">
-          <img src={logoSrc} alt="Biscoitos Kaue" />
+          <img src={logoSrc} alt="Biscoitos Kauê" />
           <span>Painel administrativo</span>
         </div>
 
-        <nav className="sidebar-nav" aria-label="Navegacao principal">
+        <nav className="sidebar-nav" aria-label="Navegação principal">
           <NavLink to="/">Dashboard</NavLink>
           <NavLink to="/pedidos">Pedidos</NavLink>
           <NavLink to="/produtos">Produtos</NavLink>
