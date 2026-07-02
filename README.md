@@ -1,73 +1,272 @@
-# React + TypeScript + Vite
+# Biscoitos Kauê Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Painel administrativo web do sistema **Biscoitos Kauê**, desenvolvido em React para acompanhamento e gerenciamento dos pedidos realizados pelos representantes comerciais.
 
-Currently, two official plugins are available:
+Este projeto faz parte do Projeto de Desenvolvimento de Software do curso de Análise e Desenvolvimento de Sistemas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Sobre o projeto
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+A empresa Biscoitos Kauê possui representantes comerciais que realizam pedidos de produtos para clientes. O painel web foi desenvolvido para que a administração possa acompanhar os pedidos enviados pelo aplicativo mobile, gerenciar produtos e controlar representantes comerciais.
 
-## Expanding the ESLint configuration
+A solução completa é composta por:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Mobile:** aplicativo Flutter para representantes comerciais;
+* **Backend:** API REST em Java com Spring Boot;
+* **Web:** painel administrativo em React;
+* **Banco de dados:** PostgreSQL.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Funcionalidades do painel
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* Login de administrador;
+* Armazenamento de token JWT;
+* Redirecionamento automático em caso de token expirado;
+* Dashboard com métricas;
+* Listagem de pedidos;
+* Busca e filtros de pedidos;
+* Detalhe do pedido;
+* Alteração de status do pedido;
+* Listagem de produtos;
+* Cadastro de produtos;
+* Edição de produtos;
+* Inativação de produtos;
+* Listagem de representantes;
+* Cadastro de representantes;
+* Inativação de representantes;
+* Interface visual com identidade da Biscoitos Kauê;
+* Logo oficial aplicada no login e no menu lateral.
+
+---
+
+## Tecnologias utilizadas
+
+* React
+* TypeScript
+* Vite
+* Axios
+* React Router DOM
+* CSS
+* Node.js
+* npm
+
+---
+
+## Integração com o backend
+
+O painel web consome a API backend do sistema Biscoitos Kauê.
+
+Durante o desenvolvimento local, a API roda em:
+
+```text
+http://localhost:8080
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Pré-requisitos
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Antes de rodar o projeto, é necessário ter instalado:
+
+* Node.js;
+* npm;
+* Backend do projeto rodando localmente.
+
+---
+
+## Como rodar o projeto
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/KaueMagnus/biscoitos-kaue-web.git
 ```
+
+Acesse a pasta do projeto:
+
+```bash
+cd biscoitos-kaue-web
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Rode o painel em ambiente de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+O painel ficará disponível em:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Scripts disponíveis
+
+```bash
+npm run dev
+```
+
+Roda o projeto em ambiente de desenvolvimento.
+
+```bash
+npm run build
+```
+
+Gera a versão de produção.
+
+```bash
+npm run preview
+```
+
+Executa uma prévia local da versão de produção.
+
+```bash
+npm run lint
+```
+
+Executa a verificação de lint.
+
+---
+
+## Fluxo principal do painel
+
+1. O administrador acessa o painel web.
+2. Faz login com suas credenciais.
+3. Visualiza o dashboard com métricas do sistema.
+4. Acompanha a listagem de pedidos.
+5. Filtra pedidos por cliente, representante, status ou tipo.
+6. Abre o detalhe de um pedido.
+7. Altera o status do pedido.
+8. Gerencia produtos.
+9. Gerencia representantes comerciais.
+
+---
+
+## Dashboard
+
+O dashboard apresenta uma visão geral do sistema, incluindo:
+
+* total de pedidos;
+* pedidos pendentes;
+* pedidos enviados;
+* pedidos cancelados;
+* produtos ativos;
+* representantes ativos.
+
+---
+
+## Pedidos
+
+A tela de pedidos permite:
+
+* listar pedidos;
+* buscar por cliente;
+* buscar por representante;
+* filtrar por status;
+* filtrar por tipo;
+* abrir detalhes do pedido;
+* alterar status.
+
+Status disponíveis:
+
+```text
+PENDENTE
+ENVIADO
+CANCELADO
+```
+
+Tipos de pedido:
+
+```text
+NORMAL
+TROCA
+```
+
+---
+
+## Produtos
+
+O painel permite:
+
+* listar produtos;
+* cadastrar produtos;
+* editar produtos;
+* inativar produtos.
+
+---
+
+## Representantes
+
+O painel permite:
+
+* listar representantes;
+* cadastrar representantes;
+* inativar representantes.
+
+Representantes inativados não conseguem acessar o aplicativo mobile.
+
+---
+
+## Usuário de teste
+
+Usuário utilizado durante o desenvolvimento:
+
+```text
+ADMIN
+E-mail: admin@biscoitoskaue.com
+Senha: 123456
+```
+
+Observação: os usuários podem variar conforme os dados cadastrados no backend.
+
+---
+
+## Links importantes
+
+Backend:
+
+```text
+https://github.com/KaueMagnus/biscoitos-kaue-backend
+```
+
+Mobile:
+
+```text
+https://github.com/KaueMagnus/biscoitos-kaue-mobile
+```
+
+Web:
+
+```text
+https://github.com/KaueMagnus/biscoitos-kaue-web
+```
+
+APK:
+
+```text
+EM_BREVE
+```
+
+---
+
+## Autor
+
+Desenvolvido por **Kaue Marques Magnus**.
+
+Projeto desenvolvido para a disciplina de Projeto de Desenvolvimento de Software do curso de Análise e Desenvolvimento de Sistemas.
+
+---
+
+## Licença
+
+Projeto acadêmico desenvolvido para fins educacionais.
