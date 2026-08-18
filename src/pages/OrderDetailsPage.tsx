@@ -5,6 +5,7 @@ import {
   obterNomeCliente,
   obterNomeRepresentante,
   PEDIDO_STATUS,
+  type ClientePedido,
   type Pedido,
   type PedidoStatus,
 } from '../models/Pedido'
@@ -34,6 +35,116 @@ function statusVariant(status: PedidoStatus) {
   }
 
   return 'danger'
+}
+
+function valorOuTraco(valor?: string | null) {
+  return valor && valor.trim() ? valor : '-'
+}
+
+function primeiroTexto(...valores: Array<string | undefined | null>) {
+  for (const valor of valores) {
+    if (valor && valor.trim()) {
+      return valor
+    }
+  }
+
+  return '-'
+}
+
+function CampoDetalhe({
+  label,
+  value,
+}: {
+  label: string
+  value?: string | null
+}) {
+  return (
+    <div>
+      <strong>{label}</strong>
+      <span>{valorOuTraco(value)}</span>
+    </div>
+  )
+}
+
+function DadosClienteNotaFiscal({ cliente }: { cliente?: ClientePedido }) {
+  if (!cliente) {
+    return (
+      <section className="page-section-card">
+        <h2>Dados do cliente para nota fiscal</h2>
+        <p className="empty-message">
+          Dados completos do cliente não foram retornados pelo backend.
+        </p>
+      </section>
+    )
+  }
+
+  return (
+    <section className="page-section-card">
+      <h2>Dados do cliente para nota fiscal</h2>
+
+      <div className="details-grid">
+        <CampoDetalhe
+          label="Razão Social"
+          value={primeiroTexto(cliente.razaoSocial, cliente.nome)}
+        />
+
+        <CampoDetalhe
+          label="Nome Fantasia"
+          value={primeiroTexto(cliente.nomeFantasia, cliente.nome)}
+        />
+
+        <CampoDetalhe
+          label="CNPJ / CPF"
+          value={primeiroTexto(cliente.cnpj, cliente.documento)}
+        />
+
+        <CampoDetalhe
+          label="IE / Isento"
+          value={cliente.inscricaoEstadual}
+        />
+
+        <CampoDetalhe
+          label="Comprador"
+          value={cliente.nomeComprador}
+        />
+
+        <CampoDetalhe
+          label="Contato"
+          value={cliente.telefone}
+        />
+
+        <CampoDetalhe
+          label="E-mail"
+          value={cliente.email}
+        />
+
+        <CampoDetalhe
+          label="Rua"
+          value={cliente.rua}
+        />
+
+        <CampoDetalhe
+          label="Bairro"
+          value={cliente.bairro}
+        />
+
+        <CampoDetalhe
+          label="Cidade"
+          value={cliente.cidade}
+        />
+
+        <CampoDetalhe
+          label="Estado"
+          value={cliente.estado}
+        />
+
+        <CampoDetalhe
+          label="CEP"
+          value={cliente.cep}
+        />
+      </div>
+    </section>
+  )
 }
 
 export function OrderDetailsPage() {
@@ -135,7 +246,17 @@ export function OrderDetailsPage() {
                 <strong>Total</strong>
                 <span>{formatarMoeda(pedido.valorTotal ?? pedido.total)}</span>
               </div>
+              <div>
+                <strong>Observação</strong>
+                <span>{valorOuTraco(pedido.observacao)}</span>
+              </div>
+              <div>
+                <strong>Motivo da troca</strong>
+                <span>{valorOuTraco(pedido.motivoTroca)}</span>
+              </div>
             </div>
+
+            <DadosClienteNotaFiscal cliente={pedido.cliente} />
 
             <section className="status-form">
               <h2>Alterar status</h2>
