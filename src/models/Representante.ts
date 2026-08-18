@@ -10,3 +10,7 @@ export type RepresentanteFormData = {
   email: string
   senha: string
 }
+
+export type RedefinirSenhaRepresentanteData = {
+  novaSenha: string
+}

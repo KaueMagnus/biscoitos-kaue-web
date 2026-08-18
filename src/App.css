@@ -698,3 +698,261 @@ td a {
     max-width: none;
   }
 }
+
+.representative-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.action-button-primary {
+  border-color: rgba(217, 35, 31, 0.35);
+  background: #fff7f7;
+  color: var(--brand-red);
+}
+
+.action-button-primary:hover {
+  border-color: var(--brand-red);
+  background: #ffe8e8;
+  color: var(--brand-red-dark);
+}
+
+.action-button-danger {
+  border-color: #f4b4b4;
+  background: #fff5f5;
+  color: var(--danger);
+}
+
+.action-button-danger:hover {
+  border-color: var(--danger);
+  background: #fee2e2;
+  color: #8f1414;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(31, 26, 23, 0.58);
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay-confirm {
+  z-index: 1010;
+}
+
+.modal-card {
+  width: min(560px, 100%);
+  box-sizing: border-box;
+  padding: 26px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 28px 80px rgba(35, 31, 32, 0.26);
+}
+
+.modal-card-confirm {
+  width: min(420px, 100%);
+  text-align: center;
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.modal-header h2,
+.modal-card-confirm h2 {
+  margin: 0;
+  color: var(--text-dark);
+  font-size: 24px;
+}
+
+.modal-kicker {
+  display: inline-flex;
+  margin-bottom: 4px;
+  color: var(--brand-gold);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.modal-close-button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.modal-close-button:hover {
+  background: #fff9f2;
+  color: var(--text-dark);
+}
+
+.modal-description {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.modal-selected-card {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 18px 0;
+  padding: 14px 16px;
+  background: #fff7ed;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--brand-red);
+  border-radius: 8px;
+}
+
+.modal-selected-card span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.modal-selected-card strong {
+  color: var(--text-dark);
+  font-size: 18px;
+}
+
+.modal-selected-card small {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.password-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  padding-right: 86px;
+}
+
+.password-toggle-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  padding: 6px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--brand-red);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.password-toggle-button:hover {
+  background: transparent;
+  color: var(--brand-red-dark);
+}
+
+.password-rules {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.password-rules li + li {
+  margin-top: 4px;
+}
+
+.modal-error-message {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--danger);
+  background: #fee2e2;
+  border-radius: 6px;
+  font-weight: 800;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.modal-actions-confirm {
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.confirm-icon {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: #fff0b8;
+  color: #7c4a03;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.modal-warning {
+  margin: 12px 0 0;
+  color: var(--danger);
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .password-modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions,
+  .modal-actions-confirm {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}

@@ -2,6 +2,7 @@ import { httpClient } from '../api/httpClient'
 import type {
   Representante,
   RepresentanteFormData,
+  RedefinirSenhaRepresentanteData,
 } from '../models/Representante'
 
 export async function listarRepresentantes() {
@@ -23,5 +24,17 @@ export async function inativarRepresentante(id: number) {
   const response = await httpClient.patch<Representante>(
     `/representantes/${id}/inativar`,
   )
+  return response.data
+}
+
+export async function redefinirSenhaRepresentante(
+  id: number,
+  dados: RedefinirSenhaRepresentanteData,
+) {
+  const response = await httpClient.patch<Representante>(
+    `/representantes/${id}/senha`,
+    dados,
+  )
+
   return response.data
 }
