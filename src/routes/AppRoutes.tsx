@@ -5,6 +5,7 @@ import { OrderDetailsPage } from '../pages/OrderDetailsPage'
 import { OrdersPage } from '../pages/OrdersPage'
 import { ProductsPage } from '../pages/ProductsPage'
 import { RepresentativesPage } from '../pages/RepresentativesPage'
+import { TabelasVendaPage } from '../pages/TabelasVendaPage'
 import { ProtectedRoute } from './ProtectedRoute'
 
 export function AppRoutes() {
@@ -18,6 +19,7 @@ export function AppRoutes() {
           <Route path="/pedidos" element={<OrdersPage />} />
           <Route path="/pedidos/:id" element={<OrderDetailsPage />} />
           <Route path="/produtos" element={<ProductsPage />} />
+          <Route path="/tabelas-venda" element={<TabelasVendaPage />} />
           <Route path="/representantes" element={<RepresentativesPage />} />
         </Route>
 

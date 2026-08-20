@@ -28,6 +28,7 @@ export function AppLayout({ children }: AppLayoutProps) {
           <NavLink to="/">Dashboard</NavLink>
           <NavLink to="/pedidos">Pedidos</NavLink>
           <NavLink to="/produtos">Produtos</NavLink>
+          <NavLink to="/tabelas-venda">Tabelas de venda</NavLink>
           <NavLink to="/representantes">Representantes</NavLink>
         </nav>
 
