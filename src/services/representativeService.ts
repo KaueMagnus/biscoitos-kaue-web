@@ -20,6 +20,13 @@ export async function cadastrarRepresentante(
   return response.data
 }
 
+export async function ativarRepresentante(id: number) {
+  const response = await httpClient.patch<Representante>(
+    `/representantes/${id}/ativar`,
+  )
+  return response.data
+}
+
 export async function inativarRepresentante(id: number) {
   const response = await httpClient.patch<Representante>(
     `/representantes/${id}/inativar`,

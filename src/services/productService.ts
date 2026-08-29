@@ -16,6 +16,11 @@ export async function editarProduto(id: number, produto: ProdutoFormData) {
   return response.data
 }
 
+export async function ativarProduto(id: number) {
+  const response = await httpClient.patch<Produto>(`/produtos/${id}/ativar`)
+  return response.data
+}
+
 export async function inativarProduto(id: number) {
   await httpClient.patch(`/produtos/${id}/inativar`)
 }

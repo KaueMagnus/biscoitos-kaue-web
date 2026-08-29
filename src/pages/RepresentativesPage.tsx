@@ -5,6 +5,7 @@ import type {
   RepresentanteFormData,
 } from '../models/Representante'
 import {
+  ativarRepresentante,
   cadastrarRepresentante,
   inativarRepresentante,
   listarRepresentantes,
@@ -78,6 +79,19 @@ export function RepresentativesPage() {
       setErro('Não foi possível cadastrar o representante.')
     } finally {
       setSalvando(false)
+    }
+  }
+
+  async function handleAtivar(representante: Representante) {
+    setErro('')
+    setMensagem('')
+
+    try {
+      await ativarRepresentante(representante.id)
+      setMensagem('Representante ativado com sucesso.')
+      await carregarRepresentantes()
+    } catch {
+      setErro('Não foi possível ativar o representante.')
     }
   }
 
@@ -292,14 +306,23 @@ export function RepresentativesPage() {
                           Redefinir senha
                         </button>
 
-                        <button
-                          type="button"
-                          className="action-button action-button-danger"
-                          disabled={representante.ativo === false}
-                          onClick={() => solicitarInativacao(representante)}
-                        >
-                          Inativar
-                        </button>
+                        {representante.ativo === false ? (
+                          <button
+                            type="button"
+                            className="action-button action-button-primary"
+                            onClick={() => handleAtivar(representante)}
+                          >
+                            Ativar
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className="action-button action-button-danger"
+                            onClick={() => solicitarInativacao(representante)}
+                          >
+                            Inativar
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>

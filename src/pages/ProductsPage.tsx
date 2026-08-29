@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { StatusBadge } from '../components/StatusBadge'
 import type { Produto, ProdutoFormData } from '../models/Produto'
 import {
+  ativarProduto,
   cadastrarProduto,
   editarProduto,
   inativarProduto,
@@ -119,6 +120,19 @@ export function ProductsPage() {
       setErro('Não foi possível salvar o produto.')
     } finally {
       setSalvando(false)
+    }
+  }
+
+  async function handleAtivar(produto: Produto) {
+    setErro('')
+    setMensagem('')
+
+    try {
+      await ativarProduto(produto.id)
+      setMensagem('Produto ativado com sucesso.')
+      await carregarProdutos()
+    } catch {
+      setErro('Não foi possível ativar o produto.')
     }
   }
 
@@ -286,13 +300,23 @@ export function ProductsPage() {
                         >
                           Editar
                         </button>
-                        <button
-                          type="button"
-                          className="link-button danger-link"
-                          onClick={() => solicitarInativacao(produto)}
-                        >
-                          Inativar
-                        </button>
+                        {produto.ativo === false ? (
+                          <button
+                            type="button"
+                            className="link-button"
+                            onClick={() => handleAtivar(produto)}
+                          >
+                            Ativar
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            className="link-button danger-link"
+                            onClick={() => solicitarInativacao(produto)}
+                          >
+                            Inativar
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
