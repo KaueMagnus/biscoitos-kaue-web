@@ -28,6 +28,8 @@ export function RepresentativesPage() {
   const [senhaForm, setSenhaForm] = useState(senhaFormInicial)
   const [representanteSelecionado, setRepresentanteSelecionado] =
     useState<Representante | null>(null)
+  const [representanteParaInativar, setRepresentanteParaInativar] =
+    useState<Representante | null>(null)
 
   const [modalSenhaAberto, setModalSenhaAberto] = useState(false)
   const [modalConfirmacaoAberto, setModalConfirmacaoAberto] = useState(false)
@@ -37,6 +39,7 @@ export function RepresentativesPage() {
   const [carregando, setCarregando] = useState(true)
   const [salvando, setSalvando] = useState(false)
   const [salvandoSenha, setSalvandoSenha] = useState(false)
+  const [inativando, setInativando] = useState(false)
 
   const [erro, setErro] = useState('')
   const [mensagem, setMensagem] = useState('')
@@ -78,24 +81,38 @@ export function RepresentativesPage() {
     }
   }
 
-  async function handleInativar(representante: Representante) {
-    const confirmou = window.confirm(
-      `Deseja inativar o representante ${representante.nome}?`,
-    )
+  function solicitarInativacao(representante: Representante) {
+    setRepresentanteParaInativar(representante)
+    setErro('')
+    setMensagem('')
+  }
 
-    if (!confirmou) {
+  function cancelarInativacao() {
+    if (inativando) {
       return
     }
 
+    setRepresentanteParaInativar(null)
+  }
+
+  async function confirmarInativacao() {
+    if (!representanteParaInativar) {
+      return
+    }
+
+    setInativando(true)
     setErro('')
     setMensagem('')
 
     try {
-      await inativarRepresentante(representante.id)
+      await inativarRepresentante(representanteParaInativar.id)
       setMensagem('Representante inativado com sucesso.')
+      setRepresentanteParaInativar(null)
       await carregarRepresentantes()
     } catch {
       setErro('Não foi possível inativar o representante.')
+    } finally {
+      setInativando(false)
     }
   }
 
@@ -279,7 +296,7 @@ export function RepresentativesPage() {
                           type="button"
                           className="action-button action-button-danger"
                           disabled={representante.ativo === false}
-                          onClick={() => handleInativar(representante)}
+                          onClick={() => solicitarInativacao(representante)}
                         >
                           Inativar
                         </button>
@@ -450,6 +467,44 @@ export function RepresentativesPage() {
                 disabled={salvandoSenha}
               >
                 {salvandoSenha ? 'Redefinindo...' : 'Confirmar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {representanteParaInativar && (
+        <div className="modal-overlay modal-overlay-confirm" role="presentation">
+          <div
+            className="modal-card modal-card-confirm"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="confirm-icon">!</div>
+
+            <h2>Confirmar inativação</h2>
+
+            <p className="modal-description">
+              Deseja realmente inativar o representante{' '}
+              <strong>{representanteParaInativar.nome}</strong>?
+            </p>
+
+            <div className="modal-actions modal-actions-confirm">
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={cancelarInativacao}
+                disabled={inativando}
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="button"
+                onClick={confirmarInativacao}
+                disabled={inativando}
+              >
+                {inativando ? 'Inativando...' : 'Confirmar'}
               </button>
             </div>
           </div>

@@ -42,8 +42,11 @@ export function ProductsPage() {
   const [produtos, setProdutos] = useState<Produto[]>([])
   const [form, setForm] = useState<ProdutoFormState>(formInicial)
   const [produtoEditando, setProdutoEditando] = useState<Produto | null>(null)
+  const [produtoParaInativar, setProdutoParaInativar] =
+    useState<Produto | null>(null)
   const [carregando, setCarregando] = useState(true)
   const [salvando, setSalvando] = useState(false)
+  const [inativando, setInativando] = useState(false)
   const [erro, setErro] = useState('')
   const [mensagem, setMensagem] = useState('')
 
@@ -119,24 +122,38 @@ export function ProductsPage() {
     }
   }
 
-  async function handleInativar(produto: Produto) {
-    const confirmou = window.confirm(
-      `Deseja inativar o produto ${produto.nome}?`,
-    )
+  function solicitarInativacao(produto: Produto) {
+    setProdutoParaInativar(produto)
+    setErro('')
+    setMensagem('')
+  }
 
-    if (!confirmou) {
+  function cancelarInativacao() {
+    if (inativando) {
       return
     }
 
+    setProdutoParaInativar(null)
+  }
+
+  async function confirmarInativacao() {
+    if (!produtoParaInativar) {
+      return
+    }
+
+    setInativando(true)
     setErro('')
     setMensagem('')
 
     try {
-      await inativarProduto(produto.id)
+      await inativarProduto(produtoParaInativar.id)
       setMensagem('Produto inativado com sucesso.')
+      setProdutoParaInativar(null)
       await carregarProdutos()
     } catch {
       setErro('Não foi possível inativar o produto.')
+    } finally {
+      setInativando(false)
     }
   }
 
@@ -272,7 +289,7 @@ export function ProductsPage() {
                         <button
                           type="button"
                           className="link-button danger-link"
-                          onClick={() => handleInativar(produto)}
+                          onClick={() => solicitarInativacao(produto)}
                         >
                           Inativar
                         </button>
@@ -289,6 +306,44 @@ export function ProductsPage() {
           </div>
         )}
       </section>
+
+      {produtoParaInativar && (
+        <div className="modal-overlay modal-overlay-confirm" role="presentation">
+          <div
+            className="modal-card modal-card-confirm"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="confirm-icon">!</div>
+
+            <h2>Confirmar inativação</h2>
+
+            <p className="modal-description">
+              Deseja realmente inativar o produto{' '}
+              <strong>{produtoParaInativar.nome}</strong>?
+            </p>
+
+            <div className="modal-actions modal-actions-confirm">
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={cancelarInativacao}
+                disabled={inativando}
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="button"
+                onClick={confirmarInativacao}
+                disabled={inativando}
+              >
+                {inativando ? 'Inativando...' : 'Confirmar'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
