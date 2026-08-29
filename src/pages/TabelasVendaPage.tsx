@@ -121,6 +121,16 @@ export function TabelasVendaPage() {
     setErro('')
   }
 
+  function produtosDisponiveisParaLinha(index: number) {
+    const idsEmOutrasLinhas = itens
+      .filter((_, itemIndex) => itemIndex !== index)
+      .map((item) => item.produtoId)
+
+    return produtos.filter(
+      (produto) => !idsEmOutrasLinhas.includes(String(produto.id)),
+    )
+  }
+
   function calcularPrecoView(produto: Produto, tabela: TabelaVenda) {
     const itemPersonalizado = tabela.itens.find(
       (item) => item.produtoId === produto.id,
@@ -308,50 +318,55 @@ export function TabelasVendaPage() {
               </p>
 
               <div className="item-rows">
-                {itens.map((item, index) => (
-                  <div className="form-row" key={index}>
-                    <select
-                      value={item.produtoId}
-                      onChange={(event) =>
-                        atualizarItem(index, 'produtoId', event.target.value)
-                      }
-                      required
-                    >
-                      <option value="">Selecione um produto</option>
-                      {produtos.map((produto) => (
-                        <option key={produto.id} value={produto.id}>
-                          {produto.codigo} — {produto.nome}
-                        </option>
-                      ))}
-                    </select>
+                {itens.map((item, index) => {
+                  const produtosDisponiveis = produtosDisponiveisParaLinha(index)
 
-                    <input
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      placeholder="Preço"
-                      value={item.preco}
-                      onChange={(event) =>
-                        atualizarItem(index, 'preco', event.target.value)
-                      }
-                      required
-                    />
+                  return (
+                    <div className="form-row" key={index}>
+                      <select
+                        value={item.produtoId}
+                        onChange={(event) =>
+                          atualizarItem(index, 'produtoId', event.target.value)
+                        }
+                        required
+                      >
+                        <option value="">Selecione um produto</option>
+                        {produtosDisponiveis.map((produto) => (
+                          <option key={produto.id} value={produto.id}>
+                            {produto.codigo} — {produto.nome}
+                          </option>
+                        ))}
+                      </select>
 
-                    <button
-                      type="button"
-                      className="link-button danger-link"
-                      onClick={() => removerItem(index)}
-                    >
-                      Remover
-                    </button>
-                  </div>
-                ))}
+                      <input
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="Preço"
+                        value={item.preco}
+                        onChange={(event) =>
+                          atualizarItem(index, 'preco', event.target.value)
+                        }
+                        required
+                      />
+
+                      <button
+                        type="button"
+                        className="link-button danger-link"
+                        onClick={() => removerItem(index)}
+                      >
+                        Remover
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
 
               <button
                 type="button"
                 className="secondary-button"
                 onClick={adicionarItem}
+                disabled={itens.length >= produtos.length}
               >
                 Adicionar produto
               </button>
