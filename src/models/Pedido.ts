@@ -41,6 +41,7 @@ export type Pedido = {
   usuarioId?: number
   nomeUsuario?: string
   tipo?: string
+  formaPagamento?: string
   dataCriacao?: string
   dataPedido?: string
   observacao?: string
