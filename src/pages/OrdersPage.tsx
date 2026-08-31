@@ -157,6 +157,7 @@ export function OrdersPage() {
                     <th>Cliente</th>
                     <th>Representante</th>
                     <th>Tipo</th>
+                    <th>Forma de pagamento</th>
                     <th>Status</th>
                     <th>Total</th>
                   <th>Ações</th>
@@ -171,6 +172,7 @@ export function OrdersPage() {
                       </td>
                       <td>{obterNomeRepresentante(pedido)}</td>
                       <td>{pedido.tipo ?? '-'}</td>
+                      <td>{pedido.formaPagamento ?? '-'}</td>
                       <td>
                         <StatusBadge variant={statusVariant(pedido.status)}>
                           {pedido.status}

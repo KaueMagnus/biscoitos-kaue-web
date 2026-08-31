@@ -243,6 +243,10 @@ export function OrderDetailsPage() {
                 <span>{pedido.tipo ?? '-'}</span>
               </div>
               <div>
+                <strong>Forma de pagamento</strong>
+                <span>{pedido.formaPagamento ?? '-'}</span>
+              </div>
+              <div>
                 <strong>Total</strong>
                 <span>{formatarMoeda(pedido.valorTotal ?? pedido.total)}</span>
               </div>
